@@ -12,6 +12,9 @@ var exphbs = require('express-handlebars');
 var mongoose = require('mongoose');
 var passport = require('passport');
 
+
+var app = express();
+
 // Load environment variables from .env file
 if (app.get('env') !== 'production') {
   dotenv.load();
@@ -25,9 +28,6 @@ var contactController = require('./controllers/contact');
 
 // Passport OAuth strategies
 require('./config/passport');
-
-var app = express();
-
 
 mongoose.connect(process.env.MONGODB_URI);
 mongoose.connection.on('error', function() {
