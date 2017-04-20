@@ -13,7 +13,9 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 
 // Load environment variables from .env file
+if (app.get('env') === 'production') {
 dotenv.load();
+}
 
 // Controllers
 var HomeController = require('./controllers/home');
