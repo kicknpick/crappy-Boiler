@@ -9,8 +9,9 @@
 }
 
 #header{
-  background-color: yellow;
+  background-color: rgb(231, 208, 133);
   height: 75px;
+  margin-bottom: 0px;
 }
 
 
@@ -24,10 +25,11 @@
 }
 
 #indexContainer{
-  background-image: url("../img/indexImage.jpeg");
-  background-repeat: no-repeat;
-  background-size: 100%;
-  height: 500px;
+    height: 800px;
+    background-image: url(../img/birds2.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: bottom left;
 }
 
 #navbar{
@@ -69,8 +71,18 @@ footer {
   height: 44px;
   padding: 10px 30px;
   bottom: 0;
-  background-color: yellow;
+  background-color: rgb(231, 208, 133);
   border-top: 1px solid #e0e0e0;
+}
+
+#landingWelcome{
+  margin-left: 33%;
+  text-align: center;
+  margin-top: 12%;
+}
+
+#landingPanel{
+  background-color: rgba(255, 222, 173, .5);
 }
 
 .login-container {

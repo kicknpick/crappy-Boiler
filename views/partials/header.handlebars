@@ -9,9 +9,10 @@
       </button>
       
     <div class="navbar-collapse collapse">
-      <a href="/" class="navbar-text">Welcome to Crappy Birdz!</a>
+      {{!-- <a href="/" class="navbar-text">Welcome to Crappy Birdz!</a> --}}
       <ul class="nav navbar-nav">
         <li class="{{#ifeq title 'Home'}}active{{/ifeq}}"><a href="/">Home</a></li>
+        <li><a href="/lobby">Lobby</a></li>
         <li class="{{#ifeq title 'Contact'}}active{{/ifeq}}"><a href="/contact">About</a></li>
          <li class="{{#ifeq title 'Log in'}}active{{/ifeq}}"><a href="/login">Log in</a></li>
       <li class="{{#ifeq title 'Sign up'}}active{{/ifeq}}"><a href="/signup">Sign up</a></li>
