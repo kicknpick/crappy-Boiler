@@ -118,7 +118,9 @@ footer {
 
 /* Navbar
 /* ------------------------- */
-
+#navRightFloat{
+  float: right;
+}
 
 .navbar-default {
   background-color: #fff;

@@ -74,6 +74,9 @@ app.get('/', HomeController.index);
 app.get('/game', function(req, res) {
     res.sendFile(path.join(__dirname + '/views/gestures.html'));
 });
+app.get('/lobby', function(req, res) {
+    res.sendFile(path.join(__dirname + '/views/lobby.html'));
+});
 app.get('/contact', contactController.contactGet);
 app.post('/contact', contactController.contactPost);
 app.get('/account', userController.ensureAuthenticated, userController.accountGet);
