@@ -36,6 +36,10 @@
   margin-left: 5%;
 }
 
+#modal{
+  font-weight: bold;
+}
+
 #logoBirdz{
 height: 75px;
 }
