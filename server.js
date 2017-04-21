@@ -24,7 +24,7 @@ if (app.get('env') !== 'production') {
 var HomeController = require('./controllers/home');
 var userController = require('./controllers/user');
 var contactController = require('./controllers/contact');
-// var gridController = require('./controllers/grid');
+var gameController = require('./controllers/crappyBirdz');
 
 // Passport OAuth strategies
 require('./config/passport');
@@ -71,9 +71,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.get('/', HomeController.index);
-// app.get('/', function(req, res) {
-//     res.sendFile(path.join(__dirname + '/index_page/index.html'));
-// });
+app.get('/game', function(req, res) {
+    res.sendFile(path.join(__dirname + '/views/gestures.html'));
+});
 app.get('/contact', contactController.contactGet);
 app.post('/contact', contactController.contactPost);
 app.get('/account', userController.ensureAuthenticated, userController.accountGet);
