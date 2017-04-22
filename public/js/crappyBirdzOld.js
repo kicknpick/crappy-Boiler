@@ -6,22 +6,16 @@ var scoreP2 = 0;
 var winner;
 var p1ChosenCells = [];
 var turns = 16;
-var playerTurns;
 var x = 0, y = 0;
 var picture_score = 10;
 
 var p1ChosenCell;
 var p2ChosenCell;
 
-var keyTapped = false;
+var keyTapped;
 var highlightedTile;
 
-
-var options = ["#d0_0", "#d0_1", "#d1_2", "#d0_3",
-    "#d1_0", "#d1_1", "#d1_2", "#d1_3",
-    "#d2_0", "#d2_1", "#d2_2", "#d2_3",
-    "#d3_0", "#d3_1", "#d3_2", "#d3_3"];
-
+var options = [];
 //===== Leap motion ======
 
 
@@ -55,10 +49,8 @@ $(document).ready(function () {
                     highlightedTile.click();
                     document.getElementById("splat").play();
                     // console.log("my highlighted tile is : " + highlightedTile)
-                    $("#game-status").text("You clicked a tile!");
+                    $("#game-status").text("Awesome!");
                     keyTapped = true;
-                    console.log(keyTapped);
-                    //playersTurn();
                     break;
                 // case "screenTap":
                 //     console.log("Screen Tap Gesture");
@@ -119,34 +111,56 @@ $(document).ready(function () {
 $(document).ready(function () {
     resetBoard();
 
+    // $('.grid div').on('click', function () {
+    //     $('#' + this.id + ' .one').hide()
+    //     $('#' + this.id + ' .two').show()
 
-    $('body').on('click', '.card', function (event) {
+    //     p1ChosenCell = this.id;
+
+    //     var r1 = p1ChosenCell.charAt(1);
+    //     var c1 = p1ChosenCell.charAt(3);
+
+    //     updateHighlight(r1, c1);
+
+
+    //      // this doesn't work yet
+    //    // var valScore = document.getElementById('.two').getAttribute('score');
+        
+    //     //show picture score value to the page
+    //     // $("#picture_score").html(valScore) // how do i take the VALUE from the img tag i.e. value=300 and update my html ???
+
+
+    //     keyTapped = true;
+    //     console.log("p1ChosenCell: " + p1ChosenCell);
+    //     // console.log("score:" + valScore)
+    // });
+
+    $('body').on('click', '.card', function(event) {
         $(event.currentTarget).find('.one').addClass('hide');
         $(event.currentTarget).find('.picture').removeClass('hide');
 
         var picture_score = $(event.currentTarget).find('.picture').attr('value');
 
-        $("#picture_score").html(picture_score);
         p1ChosenCell = this.id;
-
-
 
         var r1 = p1ChosenCell.charAt(1);
         var c1 = p1ChosenCell.charAt(3);
 
-        console.log("r1: " + r1 + " c1: " + c1);
         updateHighlight(r1, c1);
 
-        options.pop(p1ChosenCell);
-
-        //keyTapped = true;
+        keyTapped = true;
         console.log("p1ChosenCell: " + p1ChosenCell);
 
         scoreP1 += parseInt(picture_score);
         $("#p1-score").html(scoreP1);
-
-        playersTurn();
     });
+
+    // $('.grid img').on('click', function () {
+    //     // var secondImg = $(".two img").last();
+    //     // console.log(secondImg);
+    //     var second = $(this).last('img').find('.two');
+    //     console.log(second);
+    // });
 
 }); // docReady
 
@@ -159,7 +173,7 @@ $(document).keyup(function (event) { // keypress? what is the leapmotion equival
         console.log("Game starts!");
         initGame();
         resetBoard();
-        //gameStarts();
+        gameStarts();
     }
 
 });
@@ -170,16 +184,16 @@ $(document).keyup(function (event) { // keypress? what is the leapmotion equival
 function initGame() {
     p1 = 0;
     p2 = 0;
-    p1ChosenCells = [];
-    turns = 16;
-    x = 0, y = 0;
-    //var keyTapped = false;
+    var p1ChosenCells = [];
+    var turns = 16;
+    var x = 0, y = 0;
+    var keyTapped = false;
 
 }//initGame
 
 function selectTile() {
     var itemsArray = [
-        {
+       {
             picture: "/img/birdvswindow.jpg",
             score: -300
         }, {
@@ -241,7 +255,7 @@ function resetBoard() {
         cardsHTML = cardsHTML + '<div class="row">';
         for (var col = 0; col < 4; col++) {
             var item = selectTile();
-            cardsHTML = cardsHTML + '<div id="d' + col + '_' + row + '" class="card">';
+            cardsHTML = cardsHTML + '<div id="d' + row + '_' + col+ '" class="card">';
             cardsHTML = cardsHTML + '<img class="picture hide" value="' + item.score + '" src="' + item.picture + '" />';
             cardsHTML = cardsHTML + '<img class="one cover" src="/img/bird.png" />';
             cardsHTML = cardsHTML + '</div>';
@@ -252,65 +266,38 @@ function resetBoard() {
     $('.grid').html(cardsHTML);
 }//resetBoard
 
-
-function playersTurn() {
-    if (turns >= 0 && keyTapped == true) {
-        //run player 1 stuff
-        turns--;
-        console.log("turns: " + turns);
-
-        keyTapped = false;
-
-        setTimeout(computersTurn(), 3000);
-
-
-    } else if (keyTapped == false) {
-        $("#game-status").html("Computer's turn");
-    } else {
-        $("#game-status").html("Game ends");
-    }
-} //
-
 function computersTurn() {
 
     //updated
     $("#game-status").text("The computer is thinking...");
 
+    p2ChosenCell = options[Math.floor((Math.random() * options.length))]; // #dx_y
+    console.log("p2: " + p2ChosenCell);
 
-    if (keyTapped != true) {
-        p2ChosenCell = options[Math.floor((Math.random() * options.length))]; // #dx_y
-       // console.log("p2: " + p2ChosenCell);
+    var r2 = p2ChosenCell.charAt(2);
+    var c2 = p2ChosenCell.charAt(4);
 
+    console.log(p2ChosenCell);;
 
-        var r2 = p2ChosenCell.charAt(2);
-        var c2 = p2ChosenCell.charAt(4);
+    updateHighlight(r2, c2);
 
-        console.log("Computer chose -> r2: " + r2 + " c2: " + c2);
-        updateHighlight(r2, c2);
+    $(p2ChosenCell).click();
 
-        $(p2ChosenCell).click();
+    options.pop(p2ChosenCell);
 
-        options.pop(p2ChosenCell);
-
-        // if (p2ChosenCell != )
-        scoreP2 += picture_score;
-        $("#p2-score").html(scoreP2);
-        //decrement turns
-        turns--;
-        // return keyTapped = true;
-        //setTimeout(playersTurn(), 5000);
-    }
-
+    // if (p2ChosenCell != )
+    scoreP2 += picture_score;
+    $("#p2-score").html(scoreP2);
+    //decrement turns
+    turns--;
+    keyTapped = true;
 }
 
-
-
-
 function gameStarts() {
-    // options = ["#d0_0", "#d0_1", "#d1_2", "#d0_3",
-    //     "#d1_0", "#d1_1", "#d1_2", "#d1_3",
-    //     "#d2_0", "#d2_1", "#d2_2", "#d2_3",
-    //     "#d3_0", "#d3_1", "#d3_2", "#d3_3"];
+    options = ["#d0_0", "#d0_1", "#d1_2", "#d0_3",
+        "#d1_0", "#d1_1", "#d1_2", "#d1_3",
+        "#d2_0", "#d2_1", "#d2_2", "#d2_3",
+        "#d3_0", "#d3_1", "#d3_2", "#d3_3"];
 
     // while (turns != 0) {
     //p1 starts
@@ -319,33 +306,33 @@ function gameStarts() {
 
     //toggles the pic that was clicked
 
-    // if (keyTapped == true) {
-    //     console.log("this is p1: " + p1ChosenCell);
+    if (keyTapped == true) {
+        console.log("this is p1: " + p1ChosenCell);
 
-    //     options.pop(p1ChosenCell);
+        options.pop(p1ChosenCell);
 
-    //     console.log("da");
-    //     console.log(options.length + "_" + options);
+        console.log("da");
+        console.log(options.length + "_" + options);
 
-    //     //show picture_score
+        //show picture_score
 
-    //     scoreP1 += picture_score;
-    //     $("#p1-score").html(scoreP1);
+        scoreP1 += picture_score;
+        $("#p1-score").html(scoreP1);
 
-    //     //mark cell as used using its data attr, class="used", we can also use backend to store the score & or picture
-    //     //chosen
+        //mark cell as used using its data attr, class="used", we can also use backend to store the score & or picture
+        //chosen
 
-    //     //decrement turns
-    //     turns--;
-
-
-    //     // player 2's turn, with a 5 sec delay
-    //     var p2Turn = setInterval(
-    //         computersTurn(), 5000);
-
-    // }
+        //decrement turns
+        turns--;
 
 
+        // player 2's turn, with a 5 sec delay
+        var p2Turn = setInterval(
+            computersTurn(), 5000);
+
+    }
+
+   
     // }
     //declareWinner();
 
