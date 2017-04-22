@@ -175,7 +175,7 @@ function initGame() {
 function selectTile() {
     var itemsArray = [
         {
-            picture: "../public/images/bird_2.jpeg",
+            picture: "/img/bird_2.jpeg",
             score: 500
         }, {
             picture: "../public/images/bird1.jpeg",
@@ -184,10 +184,19 @@ function selectTile() {
             picture: "../public/images/car-poop.jpeg",
             score: -100
         }, {
-            picture: "../public/images/bird2.jpeg",
+            picture: "../public/images/car-poop.jpeg",
+            score: -100
+        }, {
+            picture: "../public/images/car-poop.jpeg",
+            score: -100
+        }, {
+            picture: "../public/images/car-poop.jpeg",
+            score: -100
+        }, {
+            picture: "/img/boatPoop.jpeg",
             score: 700
         }, {
-            picture: "../public/images/bird3.jpg",
+            picture: "/img/presidentPoop.jpg",
             score: 1000
         }, {
             picture: "../public/images/brd4.jpeg",
